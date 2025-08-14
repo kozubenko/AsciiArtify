@@ -1,88 +1,89 @@
 -----
 
-Kubernetes забезпечує зручне керування контейнеризованими застосунками, але налаштування його з нуля може бути складним. Інструменти **Minikube**, **kind** та **k3d** значно спрощують цей процес, дозволяючи швидко запускати локальні кластери для розробки та тестування. Кожен з варіантів має свої сильні сторони та певні обмеження. Давайте розглянемо кожен з них:
+Kubernetes provides convenient management of containerized applications, but setting it up from scratch can be challenging. Tools like **Minikube**, **kind**, and **k3d** significantly simplify this process, allowing developers to quickly run local clusters for development and testing. Each option has its strengths and certain limitations. Let’s review them:
 
-  * **Minikube** створює однонодовий кластер у віртуальній машині на локальному комп’ютері. Добре підходить для перших кроків у Kubernetes.
-  * **kind (Kubernetes IN Docker)** розгортає багатонодові кластери всередині Docker-контейнерів, що зручно для більш складних сценаріїв.
-  * **k3d** запускає кластери на базі полегшеної версії Kubernetes – K3s. Він працює швидше та споживає менше ресурсів, ніж інші рішення.
+  * **Minikube** creates a single-node cluster inside a virtual machine on the local computer. It’s a good starting point for Kubernetes beginners.  
+  * **kind (Kubernetes IN Docker)** deploys multi-node clusters inside Docker containers, which is convenient for more complex scenarios.  
+  * **k3d** runs clusters based on the lightweight Kubernetes distribution K3s. It’s faster and consumes fewer resources than other solutions.  
 
 -----
 
-## Характеристики
+## Features
 
-| Характеристика | Minikube | kind | k3d |
+| Feature | Minikube | kind | k3d |
 | :--- | :--- | :--- | :--- |
-| **Підтримувані ОС** | macOS, Linux, Windows | macOS, Linux, Windows | macOS, Linux, Windows |
-| **Архітектури** | AMD64, ARM64 | AMD64, ARM64 | AMD64, ARM64 |
-| **Автоматизація** | Потребує гіпервізор (VirtualBox, Hyper-V, KVM) | Працює на Docker | Працює на Docker |
-| **Додаткові функції** | Вбудовані додатки (Dashboard, Ingress, вибір версії Kubernetes) | Багатонодові кластери, балансування навантаження | Швидкість, мінімальні ресурси, K3s |
-| **Моніторинг** | Є Dashboard | Prometheus/Grafana (сторонні) | Prometheus/Grafana (сторонні) |
-| **Мережа** | Віртуальна мережа | Мережа Docker | Мережа Docker |
+| **Supported OS** | macOS, Linux, Windows | macOS, Linux, Windows | macOS, Linux, Windows |
+| **Architectures** | AMD64, ARM64 | AMD64, ARM64 | AMD64, ARM64 |
+| **Automation** | Requires a hypervisor (VirtualBox, Hyper-V, KVM) | Runs on Docker | Runs on Docker |
+| **Extra Features** | Built-in tools (Dashboard, Ingress, version selection) | Multi-node clusters, load balancing | Speed, low resource usage, K3s |
+| **Monitoring** | Dashboard included | Prometheus/Grafana (external) | Prometheus/Grafana (external) |
+| **Networking** | Virtual network | Docker network | Docker network |
 
 -----
 
-## Переваги та недоліки
+## Pros and Cons
 
 ### Minikube
 
-**Плюси:**
+**Pros:**
 
-- Простий старт, зручний для новачків.  
-- Широка документація та велика спільнота.  
-- Корисні вбудовані інструменти (наприклад, Dashboard).  
+- Easy to start, beginner-friendly.  
+- Extensive documentation and large community.  
+- Useful built-in tools (e.g., Dashboard).  
 
-**Мінуси:**
+**Cons:**
 
-- Значне споживання ресурсів через використання віртуальної машини.  
-- Обмежене масштабування, зазвичай лише один вузол.  
+- High resource consumption due to VM usage.  
+- Limited scalability, usually single-node only.  
 
 ---
 
 ### kind
 
-**Плюси:**
+**Pros:**
 
-- Можливість створювати багатонодові кластери.  
-- Швидше розгортання у порівнянні з Minikube.  
-- Архітектура ближча до production-середовища.  
+- Ability to create multi-node clusters.  
+- Faster deployment compared to Minikube.  
+- Architecture closer to production environments.  
 
-**Мінуси:**
+**Cons:**
 
-- Менш інтуїтивний для початківців.  
-- Повна залежність від Docker.  
+- Less intuitive for beginners.  
+- Full dependency on Docker.  
 
 ---
 
 ### k3d
 
-**Плюси:**
+**Pros:**
 
-- Дуже швидке розгортання кластерів.  
-- Використовує мінімум ресурсів.  
-- Добре підходить для CI/CD та швидких експериментів.  
+- Very fast cluster setup.  
+- Minimal resource usage.  
+- Well-suited for CI/CD and rapid experiments.  
 
-**Мінуси:**
+**Cons:**
 
-- Менша спільнота у порівнянні з Minikube.  
-- Не всі можливості “повного” Kubernetes доступні.  
+- Smaller community compared to Minikube.  
+- Not all “full” Kubernetes features are available.  
 
 ---
 
-### Ризики ліцензування Docker та Podman
+### Docker and Podman Licensing Risks
 
-Зміни у політиці ліцензування Docker можуть стати ризиком для комерційного використання. Альтернативою є **Podman**, який не потребує постійного daemon-процесу та вважається безпечнішим. Minikube вже має експериментальну підтримку Podman, тоді як kind та k3d поки що обмежені в цьому плані.
+Recent changes in Docker’s licensing policies may pose risks for commercial use. An alternative is **Podman**, which doesn’t require a constant daemon process and is considered more secure. Minikube already has experimental Podman support, while kind and k3d are still limited in this area.
 
 -----
 
-### Рекомендація: 
+### Recommendation
 
-k3d є найкращим вибором для стартапу AsciiArtify на етапі Proof of Concept (PoC). Його переваги - швидкість, мінімальні вимоги до ресурсів та простота використання, що дозволить команді швидко тестувати різні ідеї, не витрачаючи багато часу на налаштування інфраструктури. Коли проєкт масштабуватиметься, можна буде перейти до більш складних рішень, але для швидкого прототипування k3d - ідеальний інструмент. Втім є залежність від Docker. 
+For the **AsciiArtify** startup at the Proof of Concept (PoC) stage, **k3d** is the best choice. Its advantages—speed, low resource requirements, and ease of use—allow the team to quickly test different ideas without spending too much time setting up infrastructure. As the project grows, more complex solutions can be adopted, but for fast prototyping, k3d is ideal. The main drawback is dependency on Docker.  
 
-Є певні інструменти які дозволяють використовувати Podman, але вони вважаються нестабільними. Тож якщо компанія планує відмовлятися від Docker через ліцензійні ризики, варто також розглянути Minikube, який має кращу підтримку Podman.
+There are tools that enable Podman usage, but they are considered unstable. So if the company plans to move away from Docker due to licensing risks, **Minikube** with better Podman support should also be considered.  
 
-Для етапу PoC стартапу **AsciiArtify** оптимальним вибором є **k3d** — він швидкий, легкий у використанні та невибагливий до ресурсів.
+For the PoC stage of **AsciiArtify**, the optimal choice is **k3d** — fast, lightweight, and resource-efficient.
 
-## Демонстрація: Hello World на Kubernetes з k3d
+-----
+
+## Demo: Hello World on Kubernetes with k3d
 
 [DEMO](https://asciinema.org/a/vjUgt1nEP7QzqBK4ZFcZ4YFmi)
-
