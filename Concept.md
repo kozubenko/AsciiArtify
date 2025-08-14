@@ -86,4 +86,4 @@ For the PoC stage of **AsciiArtify**, the optimal choice is **k3d** — fast, li
 
 ## Demo: Hello World on Kubernetes with k3d
 
-[DEMO](https://asciinema.org/a/vjUgt1nEP7QzqBK4ZFcZ4YFmi)
+[K3D DEMO](https://asciinema.org/a/vjUgt1nEP7QzqBK4ZFcZ4YFmi)
