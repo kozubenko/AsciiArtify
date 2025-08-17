@@ -2,7 +2,9 @@ name: Continuous Integration
 
 on: 
   push:
-    branches: [main]
+    paths:
+      - 'src/**'
+      - 'helm/**'
 jobs:
   ci:
     name: CI
@@ -88,5 +90,5 @@ jobs:
      - name: Push changes
        uses: ad-m/github-push-action@master
        with:
-         github_token: ${{ secrets.ACTIONS_TOKEN }}
-         branch: master
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
