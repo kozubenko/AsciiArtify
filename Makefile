@@ -20,7 +20,7 @@ push:
 	@${BUILDER} push ${TAG}:build-${BUILD}
 
 unit-test:
-	@echo "Run tests here..."`
+	@echo "Run tests here..."
 	@${BUILDER} build --target unit-test .
 
 lint:
