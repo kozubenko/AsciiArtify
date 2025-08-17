@@ -1,9 +1,9 @@
-FROM --platform=${BUILDPLATFORM} golang:1.16.6 as builder
+FROM --platform=${BUILDPLATFORM} golang:1.16.6 AS builder
 ARG APP_BUILD_INFO=$APP_BUILD_INFO
 WORKDIR /go/src/app
 COPY src/ .
 RUN export GOPATH=/go
-RUN go get
+RUN go mod download
 
 FROM builder AS build
 ARG TARGETOS

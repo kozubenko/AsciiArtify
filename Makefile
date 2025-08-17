@@ -6,9 +6,8 @@ test: unit-test
 PLATFORM=linux/amd64 
 
 BUILDER = docker
-REGISTRY=ghcr.io/kozubenko
 
-TAG=${REGISTRY}/k8sdiy
+TAG=kozubenko/k8sdiy
 
 BUILD=$$(git rev-parse HEAD|cut -c1-7)
 
