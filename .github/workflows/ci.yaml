@@ -60,6 +60,8 @@ jobs:
     name: CD
     needs: ci
     runs-on: ubuntu-latest
+    permissions:
+      contents: write 
  
     steps:
    
