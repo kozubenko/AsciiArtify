@@ -2,8 +2,7 @@ name: Continuous Integration
 
 on: 
   push:
-    branches:
-      - master
+    branches: ['master']
 jobs:
   ci:
     name: CI
