@@ -1,5 +1,6 @@
-FROM --platform=${BUILDPLATFORM} golang:1.16.6 AS builder
 ARG APP_BUILD_INFO=$APP_BUILD_INFO
+
+FROM --platform=${BUILDPLATFORM} golang:1.16.6 AS builder
 WORKDIR /go/src/app
 COPY src/ .
 RUN export GOPATH=/go
@@ -11,7 +12,7 @@ ARG TARGETARCH
 RUN --mount=type=cache,target=/root/.cache/go-build \
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o app -a -installsuffix cgo -ldflags "-X main.Version=$APP_BUILD_INFO" -v ./...
 
-FROM golangci/golangci-lint:v1.27-alpine AS lint-base
+FROM --platform=linux/amd64 golangci/golangci-lint:v1.27-alpine AS lint-base
 
 FROM builder AS lint
 COPY --from=lint-base /usr/bin/golangci-lint /usr/bin/golangci-lint
