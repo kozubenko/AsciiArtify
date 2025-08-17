@@ -22,6 +22,8 @@ func api(ctx *fasthttp.RequestCtx) {
 	//func api(w http.ResponseWriter, r *http.Request) {
 	// increment counter
 	REQ0 = REQ0 + 1
+
+	
 	var reply []byte
 	var hexEncodedStr, cached string
 	var token uint32
