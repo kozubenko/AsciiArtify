@@ -37,6 +37,9 @@ jobs:
      - name: Run build
        run: make build
 
+     - name: Pull latest changes
+       run: git pull origin main
+
      - name: Run push
        run: make push
 
