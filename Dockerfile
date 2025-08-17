@@ -1,18 +1,21 @@
-ARG APP_BUILD_INFO=$APP_BUILD_INFO
-
 FROM --platform=${BUILDPLATFORM} golang:1.16.6 AS builder
+
+ARG APP_BUILD_INFO
 WORKDIR /go/src/app
 COPY src/ .
 RUN export GOPATH=/go
 RUN go mod download
 
+# Now this will work
 RUN echo "The value of APP_BUILD_INFO is: ${APP_BUILD_INFO}"
 
 FROM builder AS build
+# Redefine the ARG within this stage's scope
+ARG APP_BUILD_INFO
 ARG TARGETOS
 ARG TARGETARCH
 RUN --mount=type=cache,target=/root/.cache/go-build \
-	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o app -a -installsuffix cgo -ldflags "-X main.Version=$APP_BUILD_INFO" -v ./...
+  CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o app -a -installsuffix cgo -ldflags "-X main.Version=${APP_BUILD_INFO}" -v ./...
 
 FROM --platform=linux/amd64 golangci/golangci-lint:v1.27-alpine AS lint-base
 
