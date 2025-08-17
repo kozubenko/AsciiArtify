@@ -91,7 +91,7 @@ jobs:
          git commit -m "update code version to ${{ steps.vars.outputs.sha_short }}"
      
      - name: Push changes
-       uses: ad-m/github-push-action@master
+       uses: ad-m/github-push-action@main
        with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
+        branch: main
