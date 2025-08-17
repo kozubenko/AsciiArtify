@@ -9,7 +9,7 @@ BUILDER = docker
 
 TAG=kozubenko/k8sdiy
 
-BUILD=$$(git rev-parse HEAD|cut -c1-7)
+BUILD=$(shell git rev-parse HEAD|cut -c1-7)
 
 build:
 	@echo "Let's build ${BUILD}"
