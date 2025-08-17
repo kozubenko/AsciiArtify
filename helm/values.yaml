@@ -4,7 +4,7 @@ app:
   port: 80
 image:
   name: kozubenko/k8sdiy
-  tag: build-df61972
+  tag: build-bb31c8c
 front:
   version: 3.0.1
   replicas: 1
