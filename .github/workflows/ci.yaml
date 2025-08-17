@@ -2,10 +2,7 @@ name: Continuous Integration
 
 on: 
   push:
-    paths:
-      - 'src/**'
-      - 'helm/**'
-
+    branches: [main]
 jobs:
   ci:
     name: CI
