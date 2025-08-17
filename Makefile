@@ -28,5 +28,5 @@ lint:
 	@${BUILDER} build --target lint .
 
 clean:
-	@echo "Cleaning up..."
+	@echo "Cleaning up..."`
 	rm -rf bin
