@@ -6,6 +6,8 @@ COPY src/ .
 RUN export GOPATH=/go
 RUN go mod download
 
+RUN echo "The value of APP_BUILD_INFO is: ${APP_BUILD_INFO}"
+
 FROM builder AS build
 ARG TARGETOS
 ARG TARGETARCH

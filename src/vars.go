@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/armon/go-metrics"
+	"github.com/den-vasyliev/image2ascii/convert"
 	"github.com/go-redis/redis"
 	"github.com/nats-io/nats.go"
-	"github.com/den-vasyliev/image2ascii/convert"
 )
 
 var (
@@ -40,7 +40,7 @@ var (
 	// AppCacheExpire app
 	AppCacheExpire = getEnv("APP_CACHE_EXPIRE", "120s")
 	// Version app
-	Version = "BUILD"
+	Version = getEnv("Version", "not set")
 	// Environment app
 	Environment = ""
 	// APIReg is a api map
