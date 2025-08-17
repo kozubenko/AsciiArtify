@@ -4,7 +4,7 @@ app:
   port: 80
 image:
   name: kozubenko/k8sdiy
-  tag: build-35e0289
+  tag: build-320304d
 front:
   version: 3.0.1
   replicas: 1
